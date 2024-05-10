@@ -25,3 +25,7 @@ conan install ..
 conan build ..
 conan export-pkg .. electricalgorithm/stable
 conan upload --all --confirm awesome_library/1.0 -r local_artifactory --force
+
+# Remove build directory.
+cd ..
+rm -rf build
