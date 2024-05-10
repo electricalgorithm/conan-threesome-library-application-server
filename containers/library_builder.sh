@@ -8,8 +8,8 @@
 
 # conan_server is defined as a service in the docker-compose file.
 ARTIFACTORY_URL="conan_server:9300"
-ARTIFACTORY_USER="demo"
-ARTIFACTORY_PASSWORD="demo"
+ARTIFACTORY_USER="user"
+ARTIFACTORY_PASSWORD="pass"
 
 # Change to the library directory.
 cd /conan_library
@@ -24,4 +24,4 @@ conan user -p $ARTIFACTORY_PASSWORD -r local_artifactory $ARTIFACTORY_USER
 conan install ..
 conan build ..
 conan export-pkg .. electricalgorithm/stable
-conan upload --all --confirm electricalgorithm/stable -r local_artifactory
+conan upload --all --confirm awesome_library/1.0 -r local_artifactory
