@@ -1,4 +1,5 @@
-from conans import ConanFile, CMake
+from conans import ConanFile
+from conan.tools.cmake import CMake
 
 
 class AwesomeAppConan(ConanFile):
@@ -13,14 +14,14 @@ class AwesomeAppConan(ConanFile):
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
     generators = "CMakeDeps", "CMakeToolchain"
-    exports_sources = "src/*"
+    exports_sources = "src/*", "CMakeLists.txt"
 
     def requirements(self):
         self.requires("awesome_library/1.0@electricalgorithm/stable")
 
     def build(self):
         cmake = CMake(self)
-        cmake.configure(source_folder="src")
+        cmake.configure()
         cmake.build()
 
     def package(self):

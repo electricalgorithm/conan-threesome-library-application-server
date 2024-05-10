@@ -14,8 +14,16 @@ cd /conan_application
 mkdir build
 cd build
 
+# Check if environment variable is set.
+if [ $BUILD_FROM_SOURCE == 1 ]; then
+    echo "BUILD_FROM_SOURCE is set."
+    conan install .. --build=awesome_library
+else
+    echo "BUILD_FROM_SOURCE is not set."
+    conan install ..  
+fi
+
 # Build the application for Linux-clang.
-conan install ..
 conan build ..
 conan package .. --package-folder ../package
 

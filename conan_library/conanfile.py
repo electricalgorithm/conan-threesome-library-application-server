@@ -1,4 +1,5 @@
-from conans import ConanFile, CMake
+from conans import ConanFile
+from conan.tools.cmake import CMake
 
 
 class AwesomeLibraryConan(ConanFile):
@@ -13,11 +14,11 @@ class AwesomeLibraryConan(ConanFile):
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
     generators = "CMakeToolchain", "CMakeDeps"
-    exports_sources = "src/*"
+    exports_sources = "src/*", "CMakeLists.txt"
 
     def build(self):
         cmake = CMake(self)
-        cmake.configure(source_folder="src")
+        cmake.configure()
         cmake.build()
 
     def package(self):

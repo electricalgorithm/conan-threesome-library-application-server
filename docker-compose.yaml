@@ -29,6 +29,8 @@ services:
       - ./conan_application:/conan_application
       - ./containers:/containers
     entrypoint: ./containers/application_builder.sh
+    environment:
+      - BUILD_FROM_SOURCE=0
   
   development:
     container_name: development
