@@ -15,10 +15,6 @@ class AwesomeLibraryConan(ConanFile):
     generators = "CMakeToolchain", "CMakeDeps"
     exports_sources = "src/*"
 
-    def config_options(self):
-        if self.settings.os == "Windows":
-            del self.options.fPIC
-
     def build(self):
         cmake = CMake(self)
         cmake.configure(source_folder="src")

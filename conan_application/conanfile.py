@@ -18,10 +18,6 @@ class AwesomeAppConan(ConanFile):
     def requirements(self):
         self.requires("awesome_library/1.0@electricalgorithm/stable")
 
-    def config_options(self):
-        if self.settings.os == "Windows":
-            del self.options.fPIC
-
     def build(self):
         cmake = CMake(self)
         cmake.configure(source_folder="src")
