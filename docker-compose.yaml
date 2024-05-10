@@ -1,0 +1,49 @@
+services:
+  conan_server:
+    container_name: conan_server
+    image: python:3.9.19-bullseye
+    ports:
+      - "9300:9300"
+    volumes:
+      - ./containers:/containers
+    entrypoint: ./containers/conan_server.sh
+    networks:
+      - fake_network
+
+  library_builder:
+    container_name: library_builder
+    build:
+      context: .
+      dockerfile: ./containers/Dockerfile
+    volumes:
+      - ./conan_library:/conan_library
+      - ./containers:/containers
+    entrypoint: ./containers/library_builder.sh
+    networks:
+      - fake_network
+
+  application_builder:
+    container_name: application_builder
+    image: ubuntu:22.04
+    volumes:
+      - ./conan_application:/conan_application
+    command: /bin/bash -c "cd /application && conan create . user/testing"
+    networks:
+      - fake_network
+  
+  development:
+    container_name: development
+    build:
+      context: .
+      dockerfile: ./containers/Dockerfile
+    volumes:
+      - ./conan_library:/conan_library
+      - ./conan_application:/conan_application
+      - ./containers:/containers
+    entrypoint: /bin/bash
+    networks:
+      - fake_network
+
+networks:
+  fake_network:
+    driver: bridge
