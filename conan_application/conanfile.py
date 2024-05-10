@@ -12,8 +12,11 @@ class AwesomeAppConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
-    generators = "cmake"
+    generators = "CMakeDeps", "CMakeToolchain"
     exports_sources = "src/*"
+
+    def requirements(self):
+        self.requires("awesome_library/1.0@electricalgorithm/stable")
 
     def config_options(self):
         if self.settings.os == "Windows":

@@ -22,10 +22,13 @@ services:
 
   application_builder:
     container_name: application_builder
-    image: ubuntu:22.04
+    build:
+      context: .
+      dockerfile: ./containers/Dockerfile
     volumes:
       - ./conan_application:/conan_application
-    command: /bin/bash -c "cd /application && conan create . user/testing"
+      - ./containers:/containers
+    entrypoint: ./containers/application_builder.sh
   
   development:
     container_name: development
