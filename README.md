@@ -9,7 +9,7 @@ Three actors:
 1. Start conan_server by `docker compose run conan_server`
 2. Build and publish the library using `docker compose run library_builder`
 3. Build the application that requires the library built in previous step with `docker compose run application_builder`
-4. Run the application in your Linux host-machine or by using `docker compose run development` and `./conan_application/package/bin/awesome_app`.
+4. Run the application in your Linux host-machine or by using `docker compose run application_runnner`
 
 ### Build from Source and Build using Generated
 If you want to build the library before linking it to application set `BUILD_FROM_SOURCE` environment variable to 1, if you want to directly use the compiled files from artifactory use 0.

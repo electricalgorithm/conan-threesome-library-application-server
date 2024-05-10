@@ -31,6 +31,15 @@ services:
     entrypoint: ./containers/application_builder.sh
     environment:
       - BUILD_FROM_SOURCE=0
+
+  application_runner:
+    container_name: application_runner
+    build:
+      context: .
+      dockerfile: ./containers/Dockerfile
+    volumes:
+      - ./containers:/containers
+    entrypoint: ./containers/application_runner.sh
   
   development:
     container_name: development

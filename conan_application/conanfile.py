@@ -30,3 +30,6 @@ class AwesomeAppConan(ConanFile):
 
     def package_info(self):
         self.cpp_info.libs = ["awesome_app"]
+
+    def deploy(self):
+        self.copy("*", dst="bin")

@@ -27,6 +27,10 @@ fi
 conan build ..
 conan package .. --package-folder ../package
 
+# Export the application to the Artifactory repository.
+conan export-pkg .. electricalgorithm/stable
+conan upload --all --confirm awesome_app/1.0 -r local_artifactory --force
+
 # Remove build directory.
 cd ..
 rm -rf build
