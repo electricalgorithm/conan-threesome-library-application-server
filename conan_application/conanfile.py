@@ -24,7 +24,8 @@ class AwesomeAppConan(ConanFile):
         cmake.build()
 
     def package(self):
-        self.copy("./bin/*", dst="bin", keep_path=False)
+        self.copy(self.name, dst="bin", src=self.build_folder, keep_path=False)
+        self.copy(f"{self.name}.exe", dst="bin", src=self.build_folder, keep_path=False)
 
     def package_info(self):
         self.cpp_info.libs = ["awesome_app"]

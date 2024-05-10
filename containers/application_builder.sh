@@ -17,3 +17,8 @@ cd build
 # Build the application for Linux-clang.
 conan install ..
 conan build ..
+conan package .. --package-folder ../package
+
+# Remove build directory.
+cd ..
+rm -rf build
